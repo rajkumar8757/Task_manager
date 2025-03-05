@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Work Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 50px; }
+        .work-item { margin: 10px 0; }
+        .done { text-decoration: line-through; color: gray; }
+    </style>
+</head>
+<body>
+    <h2>Work Tracker</h2>
+    <form action='/add' method='post'>
+        <input type='text' name='description' placeholder='Enter work item' required>
+        <button type='submit'>Add</button>
+    </form>
+    <ul>
+        {% for work_item in work_items %}
+        <li class='work-item {% if work_item.done %}done{% endif %}'>
+            {{ work_item.description }}
+            <a href='/complete/{{ work_item.item_id }}'>[Complete]</a>
+            <a href='/delete/{{ work_item.item_id }}'>[Delete]</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
